@@ -8,7 +8,7 @@ namespace GADE_POE_task_3
 {
     class WizardUnit :Unit
     {
-        public WizardUnit(int x, int y, string faction) : base(x, y, 150, 1, 25, 5, faction, 'W', "Wizard")
+        public WizardUnit(int x, int y, string faction) : base(x, y, 150, 1, 25, 5, faction, 'W', "Merlin")
         {
 
         }

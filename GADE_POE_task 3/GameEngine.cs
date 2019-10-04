@@ -13,7 +13,6 @@ namespace GADE_POE_task_3
         public static Random random = new Random();
 
         const string UNITS_FILENAME = "units.txt";
-        const string WIZARD_FILENAME = "wizards.txt";
         const string BUILDINGS_FILENAME = "buildings.txt";
         const string ROUND_FILENAME = "rounds.txt";
 
@@ -22,9 +21,10 @@ namespace GADE_POE_task_3
         string winningFaction = "";
         int round = 0;
 
-        public GameEngine()
+        public GameEngine(int width, int height)
         {
-            map = new Map(10, 10);
+            //map = new Map(10, 10);
+            map = new Map(10, 10, width, height);
         }
 
         public bool IsGameOver
@@ -88,6 +88,7 @@ namespace GADE_POE_task_3
 
 
                 Unit closestUnit = unit.GetClosestUnit(map.Units);
+                Building closestBuilding = unit.GetClosestBuilding(map.Buildings);
                 if (closestUnit == null)
                 {
                     //if a unit has not target it means the game has ended 
@@ -98,23 +99,79 @@ namespace GADE_POE_task_3
                 }
 
                 double healthPercentage = unit.Health / unit.MaxHealth;
-                if (healthPercentage <= 0.25)
+
+                if(unit.Faction == "N-Team" && healthPercentage <= 0.5)
+                {
+                    unit.RunAway();
+                }
+                else if (healthPercentage <= 0.25)
                 {
                     unit.RunAway();
                 }
 
-                else if (unit.IslnRange(closestUnit))
+                else if (unit.Faction == "N-Team")
                 {
-                    unit.Attack(closestUnit);
+                    foreach (Unit otherUnit in map.Units)
+                    {
+                        if(unit.IslnRange(otherUnit))
+                        {
+                            unit.Attack(otherUnit);
+                            Console.WriteLine(unit.Name + " " + unit.X + " " + unit.Y+ " is attacking " + otherUnit);
+                        }
+                    }
+
+                }
+
+                else if(GetDistance(closestUnit, unit) > GetDistance(closestBuilding, unit))
+                {
+                    if (unit.IslnRange(closestBuilding))
+                    {
+                        unit.Attack(closestBuilding);
+                    }
+                    else if (unit.IslnRange(closestUnit))
+                    {
+                        unit.Attack(closestUnit);
+                    }
+                    else
+                    {
+                        unit.Move(closestUnit);
+                    }
                 }
 
                 else
                 {
-                    unit.Move(closestUnit);
+                    if (unit.IslnRange(closestUnit))
+                    {
+                        unit.Attack(closestUnit);
+                    }
+                    else if (unit.IslnRange(closestBuilding))
+                    {
+                        unit.Attack(closestBuilding);
+                    }
+                    else
+                    {
+                        unit.Move(closestUnit);
+                    }
                 }
+
+
                 StaylnBounds(unit, map.Size);
             }
 
+        }
+
+        private double GetDistance(Unit otherUnit, Unit currentUnit)
+        {
+            double xDistance = otherUnit.X - currentUnit.X;
+            double yDistance = otherUnit.Y - currentUnit.Y;
+            return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+        }
+
+        private double GetDistance(Building otherBuilding, Unit currentUnit)
+        {
+            double xDistance = otherBuilding.X - currentUnit.X;
+            double yDistance = otherBuilding.Y - currentUnit.Y;
+            return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
 
         private void StaylnBounds(Unit unit, int size)

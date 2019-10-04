@@ -51,7 +51,7 @@ namespace GADE_POE_task_3
         public override void Destroy()
         {
             isDestroyed = true;
-            symbol = '_';
+            symbol = '=';
         }
 
         public override string Save()

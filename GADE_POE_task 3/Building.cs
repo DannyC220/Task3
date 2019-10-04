@@ -38,6 +38,17 @@ namespace GADE_POE_task_3
             get { return y; }
         }
 
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return maxHealth; }
+        }
+
         public string Faction
         {
             get { return faction; }
@@ -46,6 +57,11 @@ namespace GADE_POE_task_3
         public char Symbol
         {
             get { return symbol; }
+        }
+
+        public bool IsDestroyed
+        {
+            get { return isDestroyed; }
         }
 
         public abstract void Destroy();
@@ -59,6 +75,10 @@ namespace GADE_POE_task_3
                "Position: " + x + ", " + y + Environment.NewLine +
          "Health: " + health + " / " + maxHealth + Environment.NewLine;
         }
+
+       
+
+       
 
         public enum ResourceType
         {

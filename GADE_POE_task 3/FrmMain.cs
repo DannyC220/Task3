@@ -20,7 +20,13 @@ namespace GADE_POE_task_3
         public FrmMain()
         {
             InitializeComponent();
-            engine = new GameEngine();
+        }
+
+        public FrmMain(int width, int height)
+        {
+
+            InitializeComponent();
+            engine = new GameEngine(width, height);
             UpdateUI();
 
             timer = new Timer();

@@ -1,0 +1,10 @@
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\bin\Release\GADE_POE_task 3.exe.config
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\bin\Release\GADE_POE_task 3.exe
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\bin\Release\GADE_POE_task 3.pdb
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task_3.FrmMain.resources
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task_3.MapDimensions.resources
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task_3.Properties.Resources.resources
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task 3.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task 3.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task 3.exe
+C:\Users\User\Documents\Github\Task3\GADE_POE_task 3\obj\Release\GADE_POE_task 3.pdb

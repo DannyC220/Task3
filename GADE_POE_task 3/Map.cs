@@ -9,6 +9,8 @@ namespace GADE_POE_task_3
     class Map
     {
         public const int SIZE = 20;
+        public int mapWidth = 20;
+        public int mapHeight = 20;
 
         Unit[] units;
         
@@ -20,13 +22,15 @@ namespace GADE_POE_task_3
         int numUnits;
         int numBuildings;
 
-        public Map(int numUnits, int numBuildings )
+        public Map(int numUnits, int numBuildings, int width, int height )
         {
             this.numUnits = numUnits;
             this.numBuildings = numBuildings;
-
+            mapWidth = width;
+            mapHeight = height;
             Reset();
         }
+
 
         public Unit[] Units
         {
@@ -50,36 +54,46 @@ namespace GADE_POE_task_3
             get { return SIZE; }
         }
 
+        public int MapWidth
+        {
+            get { return mapWidth; }
+        }
+
+        public int MapHeight
+        {
+            get { return mapHeight; }
+        }
+
         private void InitializeUnits()
         {
             units = new Unit[numUnits];
 
             for (int i = 0; i < units.Length; i++)
             {
-                int x = GameEngine.random.Next(0, SIZE);
-                int y = GameEngine.random.Next(0, SIZE);
+                int x = GameEngine.random.Next(0, mapWidth);
+                int y = GameEngine.random.Next(0, mapHeight);
                 int factionlndex = GameEngine.random.Next(0, 3);
                 int unitType = GameEngine.random.Next(0, 3);
 
                 while (map[x, y] != null)
                 {
-                    x = GameEngine.random.Next(0, SIZE);
-                    y = GameEngine.random.Next(0, SIZE);
+                    x = GameEngine.random.Next(0, mapWidth);
+                    y = GameEngine.random.Next(0, mapHeight);
                 }
 
-                if (unitType == 0 && factionlndex != 1)
+                if (unitType == 0 )
                 {
                     units[i] = new MeleeUnit(x, y, factions[factionlndex]);
                 }
 
-                else if (unitType == 1 && factionlndex != 2)
+                else if (unitType == 1 )
                 {
                     units[i] = new RangedUnit(x, y, factions[factionlndex]);
                 }
 
-                else if (factionlndex == 2)
+                else if (unitType == 2)
                 {
-                    units[i] = new WizardUnit(x, y, factions[factionlndex]);
+                    units[i] = new WizardUnit(x, y, factions[2]);
                 }
                 map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
             }
@@ -91,15 +105,15 @@ namespace GADE_POE_task_3
 
             for (int i = 0; i < buildings.Length; i++)
             {
-                int x = GameEngine.random.Next(0, SIZE);
-                int y = GameEngine.random.Next(0, SIZE);
+                int x = GameEngine.random.Next(0, mapWidth);
+                int y = GameEngine.random.Next(0, mapHeight);
                 int factionlndex = GameEngine.random.Next(0, 2);
                 int buildingType = GameEngine.random.Next(0, 2);
 
                 while (map[x, y] != null)
                 {
-                    x = GameEngine.random.Next(0, SIZE);
-                    y = GameEngine.random.Next(0, SIZE);
+                    x = GameEngine.random.Next(0, mapWidth);
+                    y = GameEngine.random.Next(0, mapHeight);
 
                 }
                 if (buildingType == 0)
@@ -136,9 +150,9 @@ namespace GADE_POE_task_3
 
         public void UpdateMap()
         {
-            for (int y = 0; y < SIZE; y++)
+            for (int y = 0; y < mapHeight; y++)
             {
-                for (int x = 0; x < SIZE; x++)
+                for (int x = 0; x < mapWidth; x++)
                 {
                     map[x, y] = "  ";
 
@@ -165,9 +179,9 @@ namespace GADE_POE_task_3
         public string GetMapDisplay()
         {
             string mapString = "";
-            for (int y = 0; y < SIZE; y++)
+            for (int y = 0; y < mapHeight; y++)
             {
-                for (int x = 0; x < SIZE; x++)
+                for (int x = 0; x < mapWidth; x++)
                 {
                     mapString += map[x, y];
                 }
@@ -184,7 +198,7 @@ namespace GADE_POE_task_3
 
         public void Reset()
         {
-            map = new string[SIZE, SIZE];
+            map = new string[mapWidth, mapHeight];
             InitializeUnits();
             InitializeBuildings();
             UpdateMap();

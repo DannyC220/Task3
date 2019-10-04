@@ -94,6 +94,8 @@ namespace GADE_POE_task_3
             get { return isDestroyed; }
         }
 
+        
+
         public string Name
         {
             get { return name; }
@@ -108,6 +110,18 @@ namespace GADE_POE_task_3
             {
                 otherUnit.Health = 0;
                 otherUnit.Destroy();
+            }
+        }
+
+        public virtual void Attack(Building otherBuilding)
+        {
+            isAttacking = true;
+            otherBuilding.Health -= attack;
+
+            if (otherBuilding.Health <= 0)
+            {
+                otherBuilding.Health = 0;
+                otherBuilding.Destroy();
             }
         }
 
@@ -140,9 +154,36 @@ namespace GADE_POE_task_3
             return closestUnit;
         }
 
+        public virtual Building GetClosestBuilding(Building[] buildings)
+        {
+            double closestDistance = int.MaxValue;
+            Building closestBuilding = null;
+
+            foreach (Building otherBuilding in buildings)
+            {
+                if ( otherBuilding.Faction == faction || otherBuilding.IsDestroyed)
+                {
+                    continue;
+                }
+
+                double distance = GetDistance(otherBuilding);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestBuilding = otherBuilding;
+                }
+            }
+            return closestBuilding;
+        }
+
         public virtual bool IslnRange(Unit otherUnit)
         {
             return GetDistance(otherUnit) <= attackRange;
+        }
+
+        public virtual bool IslnRange(Building otherBuilding)
+        {
+            return GetDistance(otherBuilding) <= attackRange;
         }
 
         public virtual void Move(Unit closestUnit)
@@ -185,6 +226,13 @@ namespace GADE_POE_task_3
         {
             double xDistance = otherUnit.X - X;
             double yDistance = otherUnit.Y - Y;
+            return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+        }
+
+        protected double GetDistance(Building otherBuilding)
+        {
+            double xDistance = otherBuilding.X - X;
+            double yDistance = otherBuilding.Y - Y;
             return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
 

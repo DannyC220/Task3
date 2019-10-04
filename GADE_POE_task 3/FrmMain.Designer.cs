@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 591);
+            this.ClientSize = new System.Drawing.Size(902, 591);
             this.Controls.Add(this.rtbBuildingInfo);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
