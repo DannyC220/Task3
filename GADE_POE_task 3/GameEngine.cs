@@ -13,7 +13,8 @@ namespace GADE_POE_task_3
         public static Random random = new Random();
 
         const string UNITS_FILENAME = "units.txt";
-        const string BUIDLINGS_FILENAME = "buildings.txt";
+        const string WIZARD_FILENAME = "wizards.txt";
+        const string BUILDINGS_FILENAME = "buildings.txt";
         const string ROUND_FILENAME = "rounds.txt";
 
         Map map;
@@ -185,7 +186,7 @@ namespace GADE_POE_task_3
         public void SaveGame()
         {
             Save(UNITS_FILENAME, map.Units);
-            Save(BUIDLINGS_FILENAME, map.Buildings);
+            Save(BUILDINGS_FILENAME, map.Buildings);
             SaveRound();
         }
 
@@ -193,7 +194,7 @@ namespace GADE_POE_task_3
         {
             map.Clear();
             Load(UNITS_FILENAME);
-            Load(BUIDLINGS_FILENAME);
+            Load(BUILDINGS_FILENAME);
             LoadRound();
             map.UpdateMap();
         }

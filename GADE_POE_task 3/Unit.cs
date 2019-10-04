@@ -194,5 +194,10 @@ namespace GADE_POE_task_3
                     "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" + Environment.NewLine + name + " (" + symbol + "/" + faction[0] + ")" + Environment.NewLine +
                  "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" + Environment.NewLine + "Faction: " + faction + Environment.NewLine + "Position: " + x + ", " + y + Environment.NewLine + "Health: " + health + " / " + maxHealth + Environment.NewLine;
         }
+
+        
     }
+    
+
+    
 }

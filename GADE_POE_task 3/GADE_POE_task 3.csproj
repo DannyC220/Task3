@@ -60,6 +60,7 @@
     <Compile Include="RangedUnit.cs" />
     <Compile Include="ResourceBuilding.cs" />
     <Compile Include="Unit.cs" />
+    <Compile Include="WizardUnit.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>

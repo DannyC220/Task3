@@ -11,15 +11,16 @@ namespace GADE_POE_task_3
         public const int SIZE = 20;
 
         Unit[] units;
+        
         Building[] buildings;
 
         string[,] map;
-        string[] factions = { "A-Team", "B-Team" };
+        string[] factions = { "A-Team", "B-Team", "N-Team" };
 
         int numUnits;
         int numBuildings;
 
-        public Map(int numUnits, int numBuildings)
+        public Map(int numUnits, int numBuildings )
         {
             this.numUnits = numUnits;
             this.numBuildings = numBuildings;
@@ -36,6 +37,9 @@ namespace GADE_POE_task_3
 
         }
 
+        
+
+ 
         public Building[] Buildings
         {
             get { return buildings; }
@@ -54,8 +58,8 @@ namespace GADE_POE_task_3
             {
                 int x = GameEngine.random.Next(0, SIZE);
                 int y = GameEngine.random.Next(0, SIZE);
-                int factionlndex = GameEngine.random.Next(0, 2);
-                int unitType = GameEngine.random.Next(0, 2);
+                int factionlndex = GameEngine.random.Next(0, 3);
+                int unitType = GameEngine.random.Next(0, 3);
 
                 while (map[x, y] != null)
                 {
@@ -63,14 +67,19 @@ namespace GADE_POE_task_3
                     y = GameEngine.random.Next(0, SIZE);
                 }
 
-                if (unitType == 0)
+                if (unitType == 0 && factionlndex != 1)
                 {
                     units[i] = new MeleeUnit(x, y, factions[factionlndex]);
                 }
 
-                else
+                else if (unitType == 1 && factionlndex != 2)
                 {
                     units[i] = new RangedUnit(x, y, factions[factionlndex]);
+                }
+
+                else if (factionlndex == 2)
+                {
+                    units[i] = new WizardUnit(x, y, factions[factionlndex]);
                 }
                 map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
             }
@@ -140,6 +149,11 @@ namespace GADE_POE_task_3
             {
                 map[unit.X, unit.Y] = unit.Symbol + "|" + unit.Faction[0];
             }
+
+            //foreach(WizardUnit wizard in wizards)
+            //{
+            //    map[wizard.X, wizard.Y] = wizard.Symbol + "|" + wizard.Faction[0];
+            //}
 
             foreach (Building building in buildings)
             {
